@@ -1,0 +1,1 @@
+<h1> This is a simple app to search Amazon using React JS</h1>
