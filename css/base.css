@@ -57,11 +57,11 @@ h4 {
     font-size: 1.2em;
 }
 
-p, ul {
+p, ul.searchResults {
     margin: 15px 0;
 }
 
-ul {
+ul.searchResults {
     padding-left: 30px;
 }
 
@@ -90,7 +90,7 @@ body
 .title
 {
     width: 100%;
-    margin: 3em 0 1em;
+    margin: 0 0 1em;
     text-align: center;
     font-family: "Arvo", "Helvetica Neue", Helvetica, arial, sans-serif;
     font-size: 170%;
@@ -117,7 +117,7 @@ body
     list-style: none inside;
     width: 30%;
     margin: 0 auto 2em;
-    padding: 10px 10px 10px 0;
+    padding: 0px 10px 10px 0;
     text-align: left;
     color: #777;
     background: #fff;
@@ -127,10 +127,11 @@ body
 }
 
 
-li
+li.azonSuggests
 {
     padding: 1em ;
     border-bottom: 1px solid #eee;
+    cursor: pointer;
 }
 strong{
     color: #444;
