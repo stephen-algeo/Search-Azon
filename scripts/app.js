@@ -90,7 +90,7 @@ var SearchApp = React.createClass({
     render: function() {
         return (
             <div>
-                <h1 className="title">What are you looking for..?</h1>
+                <h1 className="title">What are you looking for...</h1>
 
                 <AutoComplete suggestions={this.state.suggestions} showSuggestions={this.showSuggestions} suggestionWasClicked={this.loadSuggestion} />
 
