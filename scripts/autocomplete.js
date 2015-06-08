@@ -2,10 +2,12 @@ var AutoComplete = React.createClass({
 
     render: function() {
 
+        fn = this.props.suggestionWasClicked;
+
         var autocompleteNodes = this.props.suggestions.map(function(word, index) {
 
             return (
-                <AmazonSuggestion word={word} index={index} />
+                <AmazonSuggestion word={word} index={index} suggestionWasClicked={fn} />
             );
         });
 

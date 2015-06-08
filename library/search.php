@@ -7,7 +7,7 @@ require('dbstart.php');
 require('amazon.php');
 require('functions.php');
 
-//$searchterm = $_POST['searchterm'];
+$searchterm = $_POST['searchterm'];
 
 $amazon = new fdev_amazon(false);
 //$result=array();
@@ -16,7 +16,7 @@ echo '<pre>';
 
 for ($i=1;$i<=5;$i++){
 
-    $result = $amazon->keyword_search("ipad", $i);
+    $result = $amazon->keyword_search($searchterm, $i);
 
 //    var_dump($result);
 
