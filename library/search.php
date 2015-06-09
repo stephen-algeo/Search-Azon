@@ -18,8 +18,6 @@ for ($i=1;$i<=5;$i++){
 
     $result = $amazon->keyword_search($searchterm, $i);
 
-//    var_dump($result);
-
     foreach($result as $product){
 
         $dbprod = array();

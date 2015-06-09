@@ -4,6 +4,7 @@ var AmazonResult = React.createClass({
         return (
             <div className="amazon-result">
 
+                <img src={this.props.product.image} />
                 <div>
                     {this.props.product.title}
                 </div>
