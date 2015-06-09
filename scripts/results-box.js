@@ -10,8 +10,10 @@ var ResultsBox = React.createClass({
         });
         return (
             <div id="searchresults" className="commentList">
-                <span>{this.props.searchresults.length}</span>
+                <span>Total: {this.props.searchresults.length}</span>
+
                 {productNodes}
+
             </div>
         );
     }

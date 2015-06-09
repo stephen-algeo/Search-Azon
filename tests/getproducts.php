@@ -24,7 +24,8 @@
     $.ajax({
         url : "../library/products.php",
         type: "POST",
-        data : {searchterm:"ipod"},
+        data : {searchterm:"something"},
+        dataType: 'json',
         success: function(data, textStatus, jqXHR)
         {
             //data - response from server

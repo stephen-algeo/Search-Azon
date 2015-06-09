@@ -8,6 +8,9 @@ require('../library/dbstart.php');
 
 $searchterm = mysql_real_escape_string($_POST['searchterm']);
 
-$products = $db->query("SELECT * FROM `amazonsearch`.`products` WHERE title LIKE '%".$searchterm."%' ", array())->all();
+
+
+//$products = $db->query("SELECT * FROM `amazonsearch`.`products` WHERE title LIKE '%".$searchterm."%' ORDER BY salesrank ", array())->all();
+$products = $db->query("SELECT * FROM products WHERE id IN (SELECT productid FROM searchresult WHERE searchterm = '".$searchterm."') ORDER BY salesrank", array())->all();
 
 echo json_encode($products);

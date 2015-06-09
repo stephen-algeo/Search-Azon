@@ -1,3 +1,5 @@
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 var SearchApp = React.createClass({
 
     loadResultsFromServer: function() {
@@ -30,11 +32,14 @@ var SearchApp = React.createClass({
         return {
             searchresults: [],
             suggestions: [],
-            searchterm: false
+            searchterm: false,
+            suggestionsenabled:true
         };
     },
     componentDidMount: function() {
         this.loadResultsFromServer();
+//        console.clear();
+        console.log(this.state);
         setInterval(this.loadResultsFromServer, this.props.pollInterval);
     },
     showSuggestions: function(e) {
@@ -50,6 +55,7 @@ var SearchApp = React.createClass({
 
             data["searchterm"] = q;
             data["suggestions"] = [];
+            data["suggestionsenabled"] = false;
 
             this.setState(data);
 
@@ -57,6 +63,10 @@ var SearchApp = React.createClass({
         }
         else {                  // other key
             if (q.length > 2){
+                data = this.state;
+                data["suggestionsenabled"] = true;
+                this.setState(data);
+
                 jQuery.ajax('http://completion.amazon.com/search/complete', {
                     cache: true,
                     data: {
@@ -69,11 +79,15 @@ var SearchApp = React.createClass({
                         console.log('error on autocompletion');
                     },
                     success: function (data) {
-                        suggestions = data[1];
 
-                        data = this.state;
-                        data["suggestions"] = suggestions;
-                        this.setState(data);
+                        if (this.state.suggestionsenabled){
+                            suggestions = data[1];
+
+                            data = this.state;
+                            data["suggestions"] = suggestions;
+                            this.setState(data);
+                        }
+
 
                     }.bind(this),
                     dataType: 'jsonp'
@@ -83,6 +97,8 @@ var SearchApp = React.createClass({
     },
     queryAmazonForTerm: function(e) {
 
+        console.log('query amazon');
+
         $.ajax({
             url : "library/search.php",
             type: "POST",
@@ -91,24 +107,28 @@ var SearchApp = React.createClass({
             cache: false,
             success: function(data, textStatus, jqXHR)
             {
+                console.log(data);
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
+                console.log(textStatus);
             }
         });
 
     },
     loadSuggestion: function(e) {
-        data = this.state;
+        $('#searchBox').val($(e.target).text());
 
+        data = this.state;
         data["searchterm"] = $(e.target).text();
         data["suggestions"] = [];
 
         this.setState(data);
+        this.queryAmazonForTerm(e);
     },
     render: function() {
         return (
-            <div>
+            <div id="searchapp">
                 <h1 className="title">What are you looking for...</h1>
 
                 <AutoComplete suggestions={this.state.suggestions} showSuggestions={this.showSuggestions} suggestionWasClicked={this.loadSuggestion} />
