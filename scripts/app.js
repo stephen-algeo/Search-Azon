@@ -52,6 +52,8 @@ var SearchApp = React.createClass({
             data["suggestions"] = [];
 
             this.setState(data);
+
+            this.queryAmazonForTerm(e);
         }
         else {                  // other key
             if (q.length > 2){
@@ -78,6 +80,23 @@ var SearchApp = React.createClass({
                 });
             }
         }
+    },
+    queryAmazonForTerm: function(e) {
+
+        $.ajax({
+            url : "library/search.php",
+            type: "POST",
+            dataType: 'json',
+            data : {searchterm:this.state.searchterm},
+            cache: false,
+            success: function(data, textStatus, jqXHR)
+            {
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            }
+        });
+
     },
     loadSuggestion: function(e) {
         data = this.state;
